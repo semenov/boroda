@@ -1,7 +1,7 @@
 Boroda
 ======
 
-Boroda is a tiny library to genreate SQL SELECT statements. The library provides a DSL which is as close as possible to SQL. Just look at the code:
+Boroda is a tiny library for SQL SELECT query generation. The library provides a DSL which is as close as possible to SQL. Just look at the code:
 
     require 'boroda'
     
@@ -46,7 +46,7 @@ The result:
     OFFSET 20
 
 
-Now let's see how to write queries using Boroda in general. Due to some techical limitations it was nessesary to change an order of SQL statements. The `from` method must be called first. A table name should be a symbol. You can specify aliases of tables passing a hash to the method like it is done in the second code snippet. Next you should specify `joins`. The order you can call DSL methods:
+Now let's see in general how to write queries using Boroda. Due to some techical limitations it was nessesary to change an order of SQL statements. The `from` method must be called first. A table name should be a symbol. You can specify aliases of tables passing a hash to the method like it is done in the second code snippet. Next you should specify `join`. The order you can call DSL methods:
 
     from tables
     [[left|right] [outer|inner] join tables
@@ -62,19 +62,19 @@ Now let's see how to write queries using Boroda in general. Due to some techical
 
 In other words, you can call all methods from the last group in any order. Boroda will take care of building a correct SQL query.
 
-The `condition` which is used in `where` and `having` ca. Использование следующих операторов имеет точно такой же смысл, какой они имеют в SQL:
+Next operators which are used in `condition` in `where` and `having` clauses have the same meaning which they have in SQL:
 +, -, *, /, >, <, >=, <=.
 
-Due to some of Ruby limitations on operator overloading several operators vary from their SQL originals:
+Due to some limitations in Ruby on operator overloading several operators vary from their SQL originals:
 
     a == b    # =>  a = b
     a <=> b   # =>  a <> b
     (a) & (b) # =>  (a) AND (b)
     (a) | (b) # =>  (a) OR (b)
 
-*Warning!* It is absolutely necessary to use brackets around operands in last two cases. Otherwise you can get an unepected results. It is connected with the fact that this to operators have a very high priority in Ruby.
+**Warning!** It is absolutely necessary to use brackets around operands in last two cases. Otherwise you can get an unepected results. It is connected with the fact that this to operators have a very high priority in Ruby.
 
-I don't recommend to use use Boroda in production as far as it could be vulnerable to SQL injectiong.
+I don't recommend to use Boroda in production as far as it could be vulnerable to SQL injections.
 
 By the way, boroda (борода) is the Russian for 'beard'.
 
